@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eco</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+<body class="light-mode">
+    <div class="container">
+        <header>
+            <h1>
+                <span class="wave wave-3">(</span><span class="wave wave-2">(</span><span class="wave wave-1">(</span>
+                eco
+                <span class="wave wave-1">)</span><span class="wave wave-2">)</span><span class="wave wave-3">)</span>
+            </h1>
+            <button id="theme-toggle" class="btn-theme"><i class="ph ph-moon"></i> Oscuro</button>
+        </header>
+
+        <main>
+            <!-- Player Card -->
+            <section class="player-card glass-panel">
+                <div class="song-info">
+                    <div class="cover-art"><i class="ph ph-vinyl-record" style="font-size: 2rem;"></i></div>
+                    <div id="current-song-display" class="song-title">Ninguna canción en reproducción</div>
+                </div>
+                
+                <audio id="audio-player" preload="auto" style="display: none;"></audio>
+
+                <div class="progress-container">
+                    <span id="time-current">0:00</span>
+                    <input type="range" id="progress-bar" value="0" max="100" class="custom-progress">
+                    <span id="time-total">0:00</span>
+                </div>
+
+                <div class="main-controls">
+                    <button id="btn-prev" class="btn-control" title="Retroceder"><i class="ph-fill ph-skip-back"></i></button>
+                    <button id="btn-play" class="btn-control btn-play" title="Reproducir/Pausar"><i class="ph-fill ph-play"></i></button>
+                    <button id="btn-next" class="btn-control" title="Adelantar"><i class="ph-fill ph-skip-forward"></i></button>
+                </div>
+            </section>
+
+            <!-- Actions panel -->
+            <section class="actions-panel glass-panel">
+                <h2>Cargar Canción</h2>
+                <div class="file-input-wrapper" style="text-align: center;">
+                    <label for="file-input" class="custom-file-upload">
+                        <i class="ph ph-upload-simple"></i> Elegir archivo MP3
+                    </label>
+                    <input type="file" id="file-input" accept="audio/mp3">
+                    <span id="file-name-display" class="file-name-display">Ningún archivo elegido</span>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="btn-add-start" class="btn-action"><i class="ph ph-arrow-line-up"></i> Agregar Inicio</button>
+                    <button id="btn-add-end" class="btn-action"><i class="ph ph-arrow-line-down"></i> Agregar Final</button>
+                </div>
+                <div class="action-buttons" style="margin-top: 1rem; display: flex; gap: 0.5rem; align-items: center;">
+                    <input type="number" id="insert-position" min="1" placeholder="Pos. (ej. 1)" style="width: 100px; padding: 0.6rem; border-radius: 20px; border: 1px solid var(--glass-border); background: var(--bg-color); color: var(--text-color); outline: none;">
+                    <button id="btn-add-pos" class="btn-action" style="flex: 1; border-radius: 20px;"><i class="ph ph-list-plus"></i> Agregar en Posición</button>
+                </div>
+            </section>
+
+            <!-- Playlist -->
+            <section class="playlist-panel glass-panel">
+                <div class="playlist-header">
+                    <h2>Cola de Reproducción</h2>
+                </div>
+                <ul id="playlist" class="playlist-list">
+                    <!-- Items from TS will appear here -->
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="./src/main.js" defer></script>
+</body>
+</html>

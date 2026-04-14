@@ -1,0 +1,6 @@
+com\player\controller\PlayerController$SongRequest.class
+com\player\config\CorsConfig.class
+com\player\model\DoublyLinkedList.class
+com\player\Application.class
+com\player\controller\PlayerController.class
+com\player\model\Node.class
