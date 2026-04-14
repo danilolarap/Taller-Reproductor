@@ -1,4 +1,5 @@
-const API_BASE = "http://localhost:8080/api";
+// Actualizado con la URL de producción en Railway
+const API_BASE = "https://eco-reproductor-musica.up.railway.app/api";
 
 const localSongs = new Map();
 
@@ -16,6 +17,7 @@ const currentDisplay = document.getElementById('current-song-display');
 const playlistUI = document.getElementById('playlist');
 const themeToggle = document.getElementById('theme-toggle');
 
+// Interfaz limpia utilizando iconos Phosphor
 themeToggle.addEventListener('click', () => {
     const isDark = document.body.classList.toggle('dark-mode');
     themeToggle.innerHTML = isDark ? '<i class="ph ph-sun"></i> Claro' : '<i class="ph ph-moon"></i> Oscuro';
@@ -39,7 +41,7 @@ fileInput.addEventListener('change', () => {
 });
 
 function generateId() {
-    return Math.random().toString(36).substring(2) + Date.now().toString(36);
+    return crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now().toString(36);
 }
 
 function prepareSong(file) {
@@ -90,7 +92,7 @@ async function updateUI() {
                 audioPlayer.play().then(() => {
                     btnPlay.innerHTML = '<i class="ph-fill ph-pause"></i>';
                 }).catch(e => {
-                    console.log("Auto-play requirere interacción previa");
+                    console.log("Auto-play requiere interacción previa");
                     btnPlay.innerHTML = '<i class="ph-fill ph-play"></i>';
                 });
             }
@@ -151,8 +153,6 @@ btnAddPos.addEventListener('click', async () => {
     insertPositionInput.value = "";
     updateUI();
 });
-
-
 
 btnNext.addEventListener('click', async () => {
     await fetch(`${API_BASE}/forward`, { method: 'POST' });
