@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://eco-reproductor-musica.up.railway.app/api";
 
 // Diccionario local para URLs (Blob) de los MP3 subidos
 const localSongs = new Map<string, string>();
@@ -23,7 +23,7 @@ const themeToggle = document.getElementById('theme-toggle') as HTMLButtonElement
 // Manejo de tema
 themeToggle.addEventListener('click', () => {
     const isDark = document.body.classList.toggle('dark-mode');
-    themeToggle.textContent = isDark ? "☀️ Claro" : "🌙 Oscuro";
+    themeToggle.textContent = isDark ? "Modo Claro" : "Modo Oscuro";
 });
 
 // Helper para obtener el archivo actual del input
@@ -48,7 +48,7 @@ async function updateUI() {
     try {
         const listRes = await fetch(`${API_BASE}/playlist`);
         const list = await listRes.json();
-        
+
         const currRes = await fetch(`${API_BASE}/current`);
         const current = await currRes.json();
 
@@ -70,15 +70,16 @@ async function updateUI() {
             const url = localSongs.get(current.songId);
             if (url && audioPlayer.src !== url) {
                 audioPlayer.src = url;
-                audioPlayer.play().catch(e => console.log("Auto-play requirere interacción previa"));
+                // Se soluciona el warning TS6133 no declarando una variable sin uso
+                audioPlayer.play().catch(() => console.log("Auto-play requiere interacción previa"));
             }
         } else {
             currentDisplay.textContent = "Ninguna canción en reproducción";
             audioPlayer.src = "";
         }
 
-    } catch (e) {
-        console.error("Error al actualizar UI:", e);
+    } catch (error) {
+        console.error("Error al actualizar UI:", error);
     }
 }
 
